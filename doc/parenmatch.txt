@@ -1,0 +1,28 @@
+*parenmatch.txt*	Underlines the word under the cursor
+
+Version: 0.0
+Author: itchyny (https://github.com/itchyny)
+License: MIT License
+Repository: https://github.com/itchyny/vim-parenmatch
+Last Change: 2016/03/27 14:44:49.
+
+CONTENTS					*parenmatch-contents*
+
+Introduction				|parenmatch-introduction|
+Changelog				|parenmatch-changelog|
+
+==============================================================================
+INTRODUCTION					*parenmatch-introduction*
+
+This *parenmatch* plugin highlights the matching parenthesis based on
+|matchpairs|. This plugin is an alternative of the standard |matchparen|
+plugin. This plugin is about 80% faster than the |matchparen| plugin.
+
+==============================================================================
+CHANGELOG					*parenmatch-changelog*
+
+0.0	2016-03-27
+	- Initial commit.
+
+==============================================================================
+vim:tw=78:sw=4:ts=8:ft=help:norl:noet:

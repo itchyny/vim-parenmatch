@@ -2,7 +2,7 @@
 " Filename: autoload/parenmatch.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/30 00:19:18.
+" Last Change: 2016/03/30 00:34:18.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -16,12 +16,11 @@ endfunction
 let s:paren = {}
 function! parenmatch#update() abort
   let insert = mode() ==# 'i' || mode() ==# 'R'
-  let col0 = col('.') - insert
-  let char = getline('.')[col0 - 1]
+  let char = getline('.')[col('.') - insert - 1]
   silent! call matchdelete(w:parenmatch)
   if !has_key(s:paren, char) | return | endif
   let [open, closed, flags, stop] = s:paren[char]
-  let line0 = line('.')
+  let [line0, col0] = [line('.'), col('.') - insert]
   if insert | let pos = getcurpos() | call cursor(line0, col0) | endif
   let [line1, col1] = searchpairpos(open, '', closed, flags, '', line(stop), 10)
   if insert | call setpos('.', pos) | endif

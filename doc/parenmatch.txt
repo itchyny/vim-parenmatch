@@ -1,10 +1,10 @@
 *parenmatch.txt*	Underlines the word under the cursor
 
-Version: 0.0
+Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/vim-parenmatch
-Last Change: 2016/03/31 08:44:39.
+Last Change: 2016/03/31 08:45:52.
 
 CONTENTS					*parenmatch-contents*
 

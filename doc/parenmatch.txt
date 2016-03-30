@@ -4,7 +4,7 @@ Version: 0.0
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/vim-parenmatch
-Last Change: 2016/03/27 14:44:49.
+Last Change: 2016/03/30 22:05:20.
 
 CONTENTS					*parenmatch-contents*
 
@@ -16,10 +16,61 @@ INTRODUCTION					*parenmatch-introduction*
 
 This *parenmatch* plugin highlights the matching parenthesis based on
 |matchpairs|. This plugin is an alternative of the standard |matchparen|
-plugin. This plugin is about 80% faster than the |matchparen| plugin.
+plugin. This plugin is about 8 times faster than the |matchparen| plugin.
+
+This plugin is enabled by default. But if you keep |matchparen| running, it is
+not efficient. In order to disable the standard |matchparen| plugin, add the
+following configuration to your vimrc file. >
+
+	let g:loaded_matchparen = 1
+<
+Why is this |parenmatch| plugin is so faster than the standard plugin? I took
+profiles again and again, I found some inefficient codes in the standard
+|matchparen| plugin.
+
+	1. Skipping the parenthesis matching based on the syntax names. It
+	   uses the {skip} argument of |searchpairpos| and deals the
+	   parenthesis matching correctly even if there is a string with a
+	   open parethesis in. This is actually an intended usage of this
+	   function as the example in the |match-parens| section shows.
+	   However, obtaining the sytnax under the cursor is basically an
+	   inefficient operation. This part of codes (the line of evaluating
+	   s_skip and searchpairpos) is the heaviest part of |matchparen|.
+
+	2. Obtaining the character under the cursor using a regular expression
+	   |/\%c|.
+
+	3. Splitting the value of |matchpairs| by a regular expression every
+	   time the cursor moves. The value of this option does not change so
+	   much. At least, it does not change while moving the cursor around.
+
+How does |parenmatch| solve (or evade) these problems?
+
+	1. It does not support strict matching of the parenthesis. Stop
+	   checking the syntax, the |parenmatch| cannot deal with the following
+	   code correctly. >
+	       [ [ "[  ]  [" ], [ "]  [  ]" ] ]
+<	   However, the plugin actually works in most pieces of code.
+
+	2. It uses the string indexing to obtain the character under the
+	   cursor. It does the same thing and is much faster.
+
+	3. It splits the value of |matchpairs| in advance. The cache is updated
+	   when the option is set (using |OptionSet|) or the active window is
+	   changed.
+
+The code of |parenmatch| is actually very small. The updating function is only
+about 10 lines. When the character under the cursor is not a parenthesis
+character, the function finishes after executing only 4 lines. I think the
+implimentation is optimal but if you find further performance improvement,
+please submit a pull request (https://github.com/itchyny/vim-parenmatch/pulls).
 
 ==============================================================================
 CHANGELOG					*parenmatch-changelog*
+
+0.1	2016-03-28, 03-30
+	- Improve performance.
+	- Documentation.
 
 0.0	2016-03-27
 	- Initial commit.

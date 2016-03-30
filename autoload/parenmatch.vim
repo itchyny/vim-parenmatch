@@ -2,7 +2,7 @@
 " Filename: autoload/parenmatch.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/30 08:50:41.
+" Last Change: 2016/03/30 20:23:26.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -10,7 +10,7 @@ set cpo&vim
 
 function! parenmatch#highlight() abort
   if !get(g:, 'parenmatch_highlight', 1) | return | endif
-  highlight parenmatch term=underline cterm=underline gui=underline
+  highlight ParenMatch term=underline cterm=underline gui=underline
 endfunction
 
 let s:paren = {}
@@ -24,7 +24,7 @@ function! parenmatch#update() abort
   if i | let p = getcurpos() | call cursor(q) | endif
   let r = searchpairpos(open, '', closed, flags, '', line(stop), 10)
   if i | call setpos('.', p) | endif
-  if r[0] > 0 | let w:parenmatch = matchaddpos('parenmatch', [q, r]) | endif
+  if r[0] > 0 | let w:parenmatch = matchaddpos('ParenMatch', [q, r]) | endif
 endfunction
 
 let s:matchpairs = ''

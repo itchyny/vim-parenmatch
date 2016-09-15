@@ -4,11 +4,12 @@ Version: 0.1
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/vim-parenmatch
-Last Change: 2016/03/31 08:45:52.
+Last Change: 2016/09/16 00:00:00.
 
 CONTENTS					*parenmatch-contents*
 
 Introduction				|parenmatch-introduction|
+Options					|parenmatch-options|
 Changelog				|parenmatch-changelog|
 
 ==============================================================================
@@ -65,6 +66,17 @@ about 10 lines. When the character under the cursor is not a parenthesis
 character, the function finishes after executing only 4 lines. I think the
 implimentation is optimal but if you find further performance improvement,
 please submit a pull request (https://github.com/itchyny/vim-parenmatch/pulls).
+
+==============================================================================
+OPTIONS						*parenmatch-options*
+
+	g:parenmatch				*g:parenmatch*
+		Set this variable to 0 to disable this plugin globally.
+
+	b:parenmatch				*b:parenmatch*
+		If you set this variable to 0, the plugin stops highlighting
+		the parenthesis under the cursor in the buffer. This variable
+		has priority over |g:parenmatch|.
 
 ==============================================================================
 CHANGELOG					*parenmatch-changelog*

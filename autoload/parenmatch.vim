@@ -2,7 +2,7 @@
 " Filename: autoload/parenmatch.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/03/30 20:23:26.
+" Last Change: 2016/09/16 00:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -15,6 +15,7 @@ endfunction
 
 let s:paren = {}
 function! parenmatch#update() abort
+  if !get(b:, 'parenmatch', get(g:, 'parenmatch', 1)) | return | endif
   let i = mode() ==# 'i' || mode() ==# 'R'
   let c = getline('.')[col('.') - i - 1]
   silent! call matchdelete(w:parenmatch)

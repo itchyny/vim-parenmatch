@@ -1,6 +1,6 @@
 *parenmatch.txt*	Underlines the word under the cursor
 
-Version: 0.1
+Version: 0.2
 Author: itchyny (https://github.com/itchyny)
 License: MIT License
 Repository: https://github.com/itchyny/vim-parenmatch
@@ -80,6 +80,9 @@ OPTIONS						*parenmatch-options*
 
 ==============================================================================
 CHANGELOG					*parenmatch-changelog*
+
+0.2	2016-09-16
+	- Add options to disable the plugin.
 
 0.1	2016-03-28 - 03-31
 	- Improve performance.

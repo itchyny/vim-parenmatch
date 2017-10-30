@@ -1,4 +1,4 @@
-*parenmatch.txt*	Underlines the word under the cursor
+*parenmatch.txt*	Highlights matching delimiters
 
 Version: 0.2
 Author: itchyny (https://github.com/itchyny)

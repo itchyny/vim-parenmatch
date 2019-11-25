@@ -17,7 +17,7 @@ let s:paren = {}
 function! parenmatch#update(...) abort
   if !get(b:, 'parenmatch', get(g:, 'parenmatch', 1)) | return | endif
   let i = a:0 ? a:1 : mode() ==# 'i' || mode() ==# 'R'
-  let c = getline('.')[col('.') - i - 1]
+  let c = matchstr(getline('.'), '.', col('.') - 1)
   silent! call matchdelete(w:parenmatch)
   if !has_key(s:paren, c) | return | endif
   let [open, closed, flags, stop] = s:paren[c]

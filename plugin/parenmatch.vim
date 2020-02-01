@@ -2,7 +2,7 @@
 " Filename: plugin/parenmatch.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2017/05/26 00:49:10.
+" Last Change: 2020/02/01 12:00:00.
 " =============================================================================
 
 if exists('g:loaded_parenmatch') || v:version < 703 || !exists('*matchaddpos')
@@ -16,7 +16,8 @@ set cpo&vim
 augroup parenmatch
   autocmd!
   autocmd VimEnter,ColorScheme * call parenmatch#highlight()
-  autocmd CursorMoved,CursorMovedI,BufWritePost * call parenmatch#update()
+  autocmd VimEnter,WinEnter,BufEnter,BufWritePost * call parenmatch#update()
+  autocmd CursorMoved,CursorMovedI * call parenmatch#cursormoved()
   autocmd InsertEnter * call parenmatch#update(1)
   autocmd InsertLeave * call parenmatch#update(0)
   autocmd VimEnter,WinEnter,BufWinEnter,FileType * call parenmatch#setup()

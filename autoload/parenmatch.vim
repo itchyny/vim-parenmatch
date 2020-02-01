@@ -2,7 +2,7 @@
 " Filename: autoload/parenmatch.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2017/05/26 00:50:35.
+" Last Change: 2020/02/01 12:00:00.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -40,6 +40,25 @@ function! parenmatch#setup() abort
     let s:paren[closed] = [ escape(open, '[]'), escape(closed, '[]'), 'bnW', 'w0' ]
   endfor
 endfunction
+
+if has('timers')
+  let s:timer = 0
+  function! parenmatch#cursormoved() abort
+    if get(w:, 'parenmatch')
+      silent! call matchdelete(w:parenmatch)
+      let w:parenmatch = 0
+    endif
+    call timer_stop(s:timer)
+    let s:timer = timer_start(50, 'parenmatch#timer_callback')
+  endfunction
+  function! parenmatch#timer_callback(...) abort
+    call parenmatch#update()
+  endfunction
+else
+  function! parenmatch#cursormoved() abort
+    call parenmatch#update()
+  endfunction
+endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

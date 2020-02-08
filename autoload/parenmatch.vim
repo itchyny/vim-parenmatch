@@ -2,7 +2,7 @@
 " Filename: autoload/parenmatch.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2020/02/01 12:00:00.
+" Last Change: 2020/02/09 00:17:20.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -58,6 +58,10 @@ else
   function! parenmatch#cursormoved() abort
     call parenmatch#update()
   endfunction
+endif
+
+if !has('vim_starting')
+  call parenmatch#highlight()
 endif
 
 let &cpo = s:save_cpo

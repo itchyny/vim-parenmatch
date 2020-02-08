@@ -16,7 +16,8 @@ set cpo&vim
 augroup parenmatch
   autocmd!
   autocmd VimEnter,ColorScheme * call parenmatch#highlight()
-  autocmd VimEnter,WinEnter,BufEnter,BufWritePost * call parenmatch#update()
+  autocmd VimEnter * execute
+    \ 'autocmd parenmatch WinEnter,BufEnter,BufWritePost * call parenmatch#update()'
   autocmd CursorMoved,CursorMovedI * call parenmatch#cursormoved()
   autocmd InsertEnter * call parenmatch#update(1)
   autocmd InsertLeave * call parenmatch#update(0)
